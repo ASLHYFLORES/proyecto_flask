@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Nuestros Productos{% endblock %}
+
+{% block content %}
+    <h1>Catálogo de Productos</h1>
+    <ul>
+        {% for item in lista %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    <p>Aquí puedes agregar la lista de lo que ofrece tu proyecto.</p>
+{% endblock %}
