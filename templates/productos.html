@@ -2,32 +2,32 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Inventario Dulce</title>
+    <title>Menú Dulce - Repostería</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('index') }}">Inicio</a> | 
-        <a href="{{ url_for('ver_productos') }}">Catálogo</a> | 
+        <a href="{{ url_for('index') }}">Inicio</a>
+        <a href="{{ url_for('ver_productos') }}">Catálogo Público</a>
         <a href="{{ url_for('acerca') }}">Acerca de</a>
     </nav>
 
-    <h1>{{ "Panel de Administración" if admin else "Nuestro Catálogo de Dulces" }}</h1>
+    <h1 style="margin-top:20px;">{{ "🎀 Panel de Administración 🎀" if admin else "🌸 Nuestra Vitrina de Postres 🌸" }}</h1>
 
-    <div class="buscador">
+    <div class="contenedor-busqueda">
         <form action="{{ url_for('buscar') }}" method="POST">
-            <input type="text" name="consulta" placeholder="Buscar postre...">
-            <button type="submit">Buscar 🔍</button>
+            <input type="text" name="consulta" placeholder="¿Qué postre se te antoja?">
+            <button type="submit">Buscar</button>
         </form>
     </div>
 
     {% if admin %}
     <div class="formulario-admin">
-        <h3>🍰 Agregar Nuevo Postre</h3>
+        <h3>🧁 Hornear Nuevo Postre</h3>
         <form action="{{ url_for('nuevo_postre') }}" method="POST">
             <input type="text" name="nombre" placeholder="Nombre" required>
             <input type="text" name="categoria" placeholder="Categoría" required>
-            <input type="number" name="stock" placeholder="Stock" required>
+            <input type="number" name="stock" placeholder="Cantidad" required>
             <input type="number" step="0.01" name="precio" placeholder="Precio" required>
             <button type="submit">Guardar en Inventario</button>
         </form>
@@ -37,8 +37,9 @@
     <table>
         <thead>
             <tr>
-                <th>Nombre</th>
+                <th>Postre</th>
                 <th>Categoría</th>
+                <th>Disponibilidad</th>
                 <th>Precio</th>
                 {% if admin %} <th>Acciones</th> {% endif %}
             </tr>
@@ -46,12 +47,21 @@
         <tbody>
             {% for p in postres %}
             <tr>
-                <td>{{ p.nombre }}</td>
-                <td>{{ p.categoria }}</td>
-                <td>${{ p.precio }}</td>
+                <td style="font-weight: bold; color: #d81b60;">{{ p.nombre }}</td>
+                <td><span class="tag-categoria">{{ p.categoria }}</span></td>
+                <td>
+                    {% if p.stock > 10 %}
+                        <span style="color: #2ecc71;">● Disponible</span>
+                    {% elif p.stock > 0 %}
+                        <span style="color: #f39c12;">● ¡Últimas {{ p.stock }} unidades!</span>
+                    {% else %}
+                        <span style="color: #e74c3c;">● Agotado</span>
+                    {% endif %}
+                </td>
+                <td style="font-weight: bold; font-size: 1.1em;">${{ p.precio }}</td>
                 {% if admin %}
                 <td>
-                    <a href="{{ url_for('eliminar', id=p.id) }}" style="color: red; font-weight: bold;">Eliminar 🗑️</a>
+                    <a href="{{ url_for('eliminar', id=p.id) }}" class="btn-eliminar">Eliminar</a>
                 </td>
                 {% endif %}
             </tr>
