@@ -1,13 +1,62 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario Dulce</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Inicio</a> | 
+        <a href="{{ url_for('ver_productos') }}">Catálogo</a> | 
+        <a href="{{ url_for('acerca') }}">Acerca de</a>
+    </nav>
 
-{% block title %}Nuestros Productos{% endblock %}
+    <h1>{{ "Panel de Administración" if admin else "Nuestro Catálogo de Dulces" }}</h1>
 
-{% block content %}
-    <h1>Catálogo de Productos</h1>
-    <ul>
-        {% for item in lista %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
-    <p>Aquí puedes agregar la lista de lo que ofrece tu proyecto.</p>
-{% endblock %}
+    <div class="buscador">
+        <form action="{{ url_for('buscar') }}" method="POST">
+            <input type="text" name="consulta" placeholder="Buscar postre...">
+            <button type="submit">Buscar 🔍</button>
+        </form>
+    </div>
+
+    {% if admin %}
+    <div class="formulario-admin">
+        <h3>🍰 Agregar Nuevo Postre</h3>
+        <form action="{{ url_for('nuevo_postre') }}" method="POST">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="text" name="categoria" placeholder="Categoría" required>
+            <input type="number" name="stock" placeholder="Stock" required>
+            <input type="number" step="0.01" name="precio" placeholder="Precio" required>
+            <button type="submit">Guardar en Inventario</button>
+        </form>
+    </div>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                {% if admin %} <th>Acciones</th> {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in postres %}
+            <tr>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.categoria }}</td>
+                <td>${{ p.precio }}</td>
+                {% if admin %}
+                <td>
+                    <a href="{{ url_for('eliminar', id=p.id) }}" style="color: red; font-weight: bold;">Eliminar 🗑️</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

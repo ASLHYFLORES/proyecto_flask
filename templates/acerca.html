@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Acerca de - Repostería</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="background-color: #fff0f5; text-align: center; font-family: sans-serif;">
+
+    <nav style="background-color: #ffb6c1; padding: 15px;">
+        <a href="{{ url_for('index') }}" style="color: white; text-decoration: none; font-weight: bold; margin: 0 15px;">Inicio</a>
+        <a href="{{ url_for('ver_productos') }}" style="color: white; text-decoration: none; font-weight: bold; margin: 0 15px;">Inventario</a>
+        <a href="{{ url_for('acerca') }}" style="color: white; text-decoration: none; font-weight: bold; margin: 0 15px;">Acerca de</a>
+    </nav>
+
+    <div style="margin-top: 50px;">
+        <h1 style="color: #d81b60;">🍰 Información del Proyecto</h1>
+        <div style="display: inline-block; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <p><strong>Materia:</strong> Desarrollo de Aplicaciones Web</p>
+            <p><strong>Tecnologías:</strong> Python + Flask + SQLite3</p>
+            <p><strong>Diseño:</strong> Estilo Pastel Coquette</p>
+        </div>
+    </div>
+</body>
+</html>

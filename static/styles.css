@@ -1,14 +1,46 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
+    background-color: #fff0f5;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    color: #444;
 }
+
 nav {
-    background: #333;
-    padding: 10px;
+    background-color: #ffb6c1;
+    padding: 15px;
+    margin-bottom: 20px;
 }
+
 nav a {
     color: white;
-    margin-right: 15px;
     text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
 }
+
+h1 { color: #d81b60; }
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+th { background-color: #ffb6c1; color: white; padding: 10px; }
+td { padding: 10px; border-bottom: 1px solid #ffe4e1; }
+
+.formulario-admin {
+    background: #ffe4e1;
+    padding: 20px;
+    width: 70%;
+    margin: 20px auto;
+    border-radius: 15px;
+    border: 2px dashed #ffb6c1;
+}
+
+input { padding: 8px; border-radius: 5px; border: 1px solid #ffb6c1; margin: 5px; }
+button { background: #d81b60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }

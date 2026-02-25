@@ -1,6 +1,25 @@
-{% extends "base.html" %}
-{% block title %}Inicio{% endblock %}
-{% block content %}
-    <h1>Página de Inicio</h1>
-    <p>¡Bienvenido! Esta es la página principal de mi proyecto.</p>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dulce Repostería - Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="background-color: #fff0f5; text-align: center; font-family: 'Segoe UI', sans-serif;">
+
+    <nav style="background-color: #ffb6c1; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <a href="{{ url_for('index') }}" style="margin: 0 15px; text-decoration: none; color: white; font-weight: bold;">Inicio</a>
+        <a href="{{ url_for('ver_productos') }}" style="margin: 0 15px; text-decoration: none; color: white; font-weight: bold;">Inventario</a>
+        <a href="{{ url_for('acerca') }}" style="margin: 0 15px; text-decoration: none; color: white; font-weight: bold;">Acerca de</a>
+    </nav>
+
+    <div style="padding: 80px 20px;">
+        <div style="font-size: 80px;">🎂</div>
+        <h1 style="color: #d81b60; font-size: 3.5rem; margin: 10px 0;">¡Bienvenida a Nuestra Repostería!</h1>
+        <p style="color: #ad1457; font-size: 1.2rem;">Tu sistema de gestión de postres con estilo.</p>
+        <br><br>
+        <a href="{{ url_for('ver_productos') }}" style="background-color: #d81b60; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);">Ver Inventario Completo</a>
+    </div>
+
+</body>
+</html>
