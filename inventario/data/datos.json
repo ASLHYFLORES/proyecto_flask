@@ -1,0 +1,26 @@
+[
+    {
+        "nombre": "Red Velvet",
+        "categoria": "Pasteles",
+        "stock": 10,
+        "precio": 28.0
+    },
+    {
+        "nombre": "Cheesecake de Frutos Rojos",
+        "categoria": "Pasteles",
+        "stock": 8,
+        "precio": 22.0
+    },
+    {
+        "nombre": "Cupcake de Chocolate",
+        "categoria": "Cupcake ",
+        "stock": 30,
+        "precio": 2.5
+    },
+    {
+        "nombre": "Tarta de Fresa",
+        "categoria": "Pasteles",
+        "stock": 10,
+        "precio": 15.5
+    }
+]

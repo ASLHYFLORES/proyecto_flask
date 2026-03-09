@@ -14,12 +14,12 @@
 
     <h1 style="margin-top:20px;">{{ "🎀 Panel de Administración 🎀" if admin else "🌸 Nuestra Vitrina de Postres 🌸" }}</h1>
 
-    <div class="contenedor-busqueda">
-        <form action="{{ url_for('buscar') }}" method="POST">
-            <input type="text" name="consulta" placeholder="¿Qué postre se te antoja?">
-            <button type="submit">Buscar</button>
-        </form>
-    </div>
+   <div class="contenedor-busqueda">
+    <form action="{{ url_for('ver_productos') }}" method="GET">
+        <input type="text" name="consulta" placeholder="Ver catálogo...">
+        <button type="submit">Actualizar</button>
+    </form>
+</div>
 
     {% if admin %}
     <div class="formulario-admin">

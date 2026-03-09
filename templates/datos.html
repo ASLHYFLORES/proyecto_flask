@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5" style="background-color: #fff0f5; padding: 30px; border-radius: 15px; border: 2px solid #ffb6c1;">
+    <h2 class="text-center" style="color: #d63384;">🍰 Registro de Producción Pastelera</h2>
+    <p class="text-center text-muted">Datos guardados en SQLite y Archivos Locales</p>
+    <hr>
+
+    <h4 style="color: #ff69b4;">1. Inventario en Base de Datos (SQLite)</h4>
+    <table class="table table-hover bg-white">
+        <thead style="background-color: #ffb6c1; color: white;">
+            <tr>
+                <th>ID</th>
+                <th>Postre</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in productos %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.categoria }}</td>
+                <td>{{ p.stock }} unid.</td>
+                <td>${{ p.precio }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+
+    <h4 style="color: #ff69b4;">2. Copia de Seguridad (Leído desde JSON)</h4>
+    <div class="alert alert-light border">
+        <ul class="list-unstyled">
+            {% for item in desde_archivo %}
+            <li>🌸 <strong>{{ item.nombre }}</strong> - {{ item.categoria }} (${{ item.precio }})</li>
+            {% else %}
+            <li>No hay datos en el archivo aún.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="text-center mt-4">
+        <a href="{{ url_for('admin_productos') }}" class="btn btn-outline-danger">Volver al Panel de Control</a>
+    </div>
+</div>
+{% endblock %}

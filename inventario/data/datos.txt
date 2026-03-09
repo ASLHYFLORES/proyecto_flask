@@ -1,0 +1,4 @@
+Red Velvet, Pasteles, 10, 28.0
+Cheesecake de Frutos Rojos, Pasteles, 8, 22.0
+Cupcake de Chocolate, Cupcake , 30, 2.5
+Tarta de Fresa, Pasteles, 10, 15.5
