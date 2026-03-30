@@ -1,25 +1,27 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Acerca de - Repostería</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body style="background-color: #fff0f5; text-align: center; font-family: sans-serif;">
+{% extends "base.html" %}
 
-    <nav style="background-color: #ffb6c1; padding: 15px;">
-        <a href="{{ url_for('index') }}" style="color: white; text-decoration: none; font-weight: bold; margin: 0 15px;">Inicio</a>
-        <a href="{{ url_for('ver_productos') }}" style="color: white; text-decoration: none; font-weight: bold; margin: 0 15px;">Inventario</a>
-        <a href="{{ url_for('acerca') }}" style="color: white; text-decoration: none; font-weight: bold; margin: 0 15px;">Acerca de</a>
-    </nav>
+{% block title %}Acerca de - Dulce Repostería{% endblock %}
 
-    <div style="margin-top: 50px;">
-        <h1 style="color: #d81b60;">🍰 Información del Proyecto</h1>
-        <div style="display: inline-block; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-            <p><strong>Materia:</strong> Desarrollo de Aplicaciones Web</p>
-            <p><strong>Tecnologías:</strong> Python + Flask + SQLite3</p>
-            <p><strong>Diseño:</strong> Estilo Pastel Coquette</p>
-        </div>
+{% block content %}
+<div style="max-width: 800px; margin: 50px auto; text-align: center; background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(255, 182, 193, 0.5);">
+    <h1 style="color: #d81b60;">Sobre Nuestro Proyecto</h1>
+    <div style="font-size: 50px; margin: 20px 0;">👩‍🍳</div>
+    
+    <p style="color: #555; font-size: 1.1rem; line-height: 1.6;">
+        Este sistema de gestión de inventario fue desarrollado para la materia de 
+        <strong>Desarrollo de aplicaciones web</strong> en la <strong>UEA</strong>.
+    </p>
+
+    <div style="background-color: #fff0f5; padding: 20px; border-radius: 15px; margin-top: 30px; border-left: 5px solid #ffb6c1;">
+        <h3 style="color: #ad1457; margin-bottom: 10px;">Objetivo del Sistema</h3>
+        <p style="color: #777;">
+            Permitir el control total (CRUD) de productos, clientes y facturación para una 
+            repostería artesanal, integrando bases de datos MySQL y generación de reportes automáticos.
+        </p>
     </div>
-</body>
-</html>
+
+    <div style="margin-top: 40px;">
+        <a href="{{ url_for('index') }}" style="color: #d81b60; text-decoration: none; font-weight: bold;">← Volver al Inicio</a>
+    </div>
+</div>
+{% endblock %}

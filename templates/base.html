@@ -2,20 +2,29 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Dulce Repostería{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        nav { background-color: #ffb6c1; padding: 15px; text-align: center; }
+        nav a { margin: 0 15px; text-decoration: none; color: white; font-weight: bold; }
+        footer { text-align: center; padding: 20px; color: #ad1457; font-size: 0.9rem; }
+        main { min-height: 400px; padding: 20px; }
+    </style>
 </head>
 <body>
     <nav>
-        <a href="/">Inicio</a> | 
-        <a href="/about">Acerca de</a> |
-        <a href="/productos">Productos</a>
+        <a href="{{ url_for('index') }}">Inicio</a> | 
+        <a href="{{ url_for('acerca') }}">Acerca de</a> |
+        <a href="{{ url_for('listar_productos') }}">Inventario</a>
     </nav>
-    <hr>
+    
     <main>
         {% block content %}{% endblock %}
     </main>
-    <hr>
-    <footer><p>© 2026 - Mi Proyecto Flask</p></footer>
+
+    <hr style="border: 1px solid #ffb6c1;">
+    <footer>
+        <p>© 2026 - Sistema de Gestión Repostería UEA</p>
+    </footer>
 </body>
 </html>
