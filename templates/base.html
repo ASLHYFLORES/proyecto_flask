@@ -2,29 +2,56 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Dulce Repostería{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Repostería UEA{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/bootstrap.min.css" rel="stylesheet">
     <style>
-        nav { background-color: #ffb6c1; padding: 15px; text-align: center; }
-        nav a { margin: 0 15px; text-decoration: none; color: white; font-weight: bold; }
-        footer { text-align: center; padding: 20px; color: #ad1457; font-size: 0.9rem; }
-        main { min-height: 400px; padding: 20px; }
+        body {
+            background-color: #ffe4e1; /* Rosado muy claro de fondo */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background-color: #d81b60; /* Rosado fuerte para el menú */
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar-custom a {
+            color: white !important;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .navbar-custom a:hover {
+            color: #ffb6c1 !important; /* Rosado claro al pasar el mouse */
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #ad1457;
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="{{ url_for('index') }}">Inicio</a> | 
-        <a href="{{ url_for('acerca') }}">Acerca de</a> |
-        <a href="{{ url_for('listar_productos') }}">Inventario</a>
-    </nav>
-    
-    <main>
-        {% block content %}{% endblock %}
-    </main>
 
-    <hr style="border: 1px solid #ffb6c1;">
+    <nav class="navbar-custom">
+        <a href="{{ url_for('index') }}">Inicio</a>
+        <a href="{{ url_for('acerca') }}">Acerca de</a>
+        <a href="{{ url_for('listar_productos') }}">Inventario</a>
+        <a href="{{ url_for('listar_facturas') }}">Facturación</a>
+    </nav>
+
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+
     <footer>
-        <p>© 2026 - Sistema de Gestión Repostería UEA</p>
+        <p>&copy; 2026 - Sistema de Gestión Repostería UEA - Desarrollo de aplicaciones web</p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
