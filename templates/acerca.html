@@ -1,27 +1,77 @@
 {% extends "base.html" %}
 
-{% block title %}Acerca de - Dulce Repostería{% endblock %}
-
 {% block content %}
-<div style="max-width: 800px; margin: 50px auto; text-align: center; background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(255, 182, 193, 0.5);">
-    <h1 style="color: #d81b60;">Sobre Nuestro Proyecto</h1>
-    <div style="font-size: 50px; margin: 20px 0;">👩‍🍳</div>
+<style>
+    /* Estilos personalizados para lograr el efecto de tu foto */
+    body {
+        background-color: #ffeef2 !important; /* Fondo rosa muy pálido */
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .acerca-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80vh; /* Centrado vertical */
+        text-align: center;
+    }
+
+    .coquette-card {
+        background-color: #ffffff;
+        padding: 40px 60px;
+        border-radius: 25px; /* Bordes muy redondeados */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Sombra suave */
+        width: 100%;
+        max-width: 500px; /* Ancho controlado de la tarjeta */
+    }
+
+    .main-title {
+        color: #d63384; /* Rosa intenso para el título */
+        font-weight: bold;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .info-item {
+        margin-bottom: 15px;
+        color: #555;
+    }
+
+    .info-label {
+        font-weight: bold;
+        color: #333;
+    }
+</style>
+
+<div class="container acerca-container">
     
-    <p style="color: #555; font-size: 1.1rem; line-height: 1.6;">
-        Este sistema de gestión de inventario fue desarrollado para la materia de 
-        <strong>Desarrollo de aplicaciones web</strong> en la <strong>UEA</strong>.
-    </p>
-
-    <div style="background-color: #fff0f5; padding: 20px; border-radius: 15px; margin-top: 30px; border-left: 5px solid #ffb6c1;">
-        <h3 style="color: #ad1457; margin-bottom: 10px;">Objetivo del Sistema</h3>
-        <p style="color: #777;">
-            Permitir el control total (CRUD) de productos, clientes y facturación para una 
-            repostería artesanal, integrando bases de datos MySQL y generación de reportes automáticos.
-        </p>
+    <div class="mb-3" style="font-size: 5rem;">
+        🍰
     </div>
 
-    <div style="margin-top: 40px;">
-        <a href="{{ url_for('index') }}" style="color: #d81b60; text-decoration: none; font-weight: bold;">← Volver al Inicio</a>
+    <h1 class="main-title">Información del Proyecto</h1>
+    
+    <div class="coquette-card mt-3">
+        <div class="info-item">
+            <span class="info-label">Materia:</span> Desarrollo de Aplicaciones Web
+        </div>
+        <div class="info-item">
+            <span class="info-label">Tecnologías:</span> Python + Flask + MySQL
+        </div>
+        <div class="info-item">
+            <span class="info-label">Diseño:</span> Estilo Pastel Coquette
+        </div>
+        <div class="info-item mt-3">
+            <span class="info-label">Universidad:</span> State University of the Amazon (UEA)
+        </div>
     </div>
+
+    <div class="mt-4">
+        <a href="{{ url_for('index') }}" class="btn btn-sm text-muted" style="border-radius: 20px;">
+            <i class="fas fa-arrow-left"></i> Volver al Inicio
+        </a>
+    </div>
+
 </div>
 {% endblock %}

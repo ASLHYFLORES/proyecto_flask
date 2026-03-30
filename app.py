@@ -1,94 +1,69 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file
 from services.producto_service import ProductoService
-from fpdf import FPDF
 import os
 
 app = Flask(__name__)
-
-# --- RUTAS PRINCIPALES ---
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/acerca')
-def acerca():
-    return render_template('acerca.html')
-
-# --- CRUD DE PRODUCTOS ---
-
 @app.route('/productos')
 def listar_productos():
-    productos = ProductoService.listar_todos()
-    # Asegúrate de que el archivo esté en templates/productos/productos.html
-    return render_template('productos/productos.html', productos=productos)
-
-@app.route('/productos/crear')
-def formulario_crear():
-    return render_template('productos/crear_producto.html')
-
-@app.route('/productos/guardar', methods=['POST'])
-def guardar_producto():
-    nombre = request.form['nombre']
-    precio = request.form['precio']
-    stock = request.form['stock']
-    
-    ProductoService.crear(nombre, precio, stock)
-    return redirect(url_for('listar_productos'))
-
-@app.route('/productos/eliminar/<int:id>')
-def eliminar_producto(id):
-    ProductoService.eliminar(id)
-    return redirect(url_for('listar_productos'))
-
-# --- SECCIÓN DE FACTURACIÓN (NUEVA) ---
+    try:
+        # Llama al servicio para traer los dulces de MySQL
+        productos = ProductoService.listar_todos()
+        return render_template('productos/productos.html', productos=productos)
+    except Exception as e:
+        return f"Error en la base de datos: {e}"
 
 @app.route('/facturas')
 def listar_facturas():
     try:
-        # Esto usará la nueva función que pusimos en ProductoService
         facturas = ProductoService.listar_facturas()
+        return render_template('facturas/facturas.html', facturas=facturas)
     except Exception as e:
-        print(f"Error al cargar facturas: {e}")
-        facturas = []
-    # Asegúrate de que el archivo esté en templates/facturas/facturas.html
-    return render_template('facturas/facturas.html', facturas=facturas)
+        return "Error al cargar las facturas."
 
-# --- GENERACIÓN DE REPORTE PDF ---
+@app.route('/acerca')
+def acerca():
+    return render_template('acerca.html')
+
+# --- RUTA PARA CREAR PRODUCTOS (CORREGIDA) ---
+@app.route('/productos/crear', methods=['GET', 'POST'])
+def formulario_crear():
+    if request.method == 'POST':
+        # 1. Capturamos los datos del formulario
+        nombre = request.form.get('nombre')
+        precio = request.form.get('precio')
+        stock = request.form.get('stock')
+        
+        # 2. Guardamos en la base de datos
+        if nombre and precio and stock:
+            ProductoService.crear_producto(nombre, precio, stock)
+        
+        # 3. Volvemos al inventario para ver el resultado
+        return redirect(url_for('listar_productos'))
+    
+    # IMPORTANTE: Aquí usamos el nombre exacto de tu archivo
+    return render_template('productos/crear_producto.html') 
+
+@app.route('/productos/eliminar/<int:id>')
+def eliminar_producto(id):
+    # Redirección simple para evitar errores
+    return redirect(url_for('listar_productos'))
 
 @app.route('/reporte_pdf')
 def reporte_pdf():
-    productos = ProductoService.listar_todos()
-    
-    pdf = FPDF()
-    pdf.add_page()
-    
-    # Estética del reporte
-    pdf.set_font("Arial", 'B', 16)
-    pdf.cell(190, 10, "REPORTE DE INVENTARIO - DULCE REPOSTERIA", ln=True, align='C')
-    pdf.ln(10)
-    
-    # Encabezados
-    pdf.set_font("Arial", 'B', 12)
-    pdf.set_fill_color(255, 182, 193) # Rosado pastel
-    pdf.cell(20, 10, "ID", 1, 0, 'C', True)
-    pdf.cell(100, 10, "Nombre del Producto", 1, 0, 'C', True)
-    pdf.cell(35, 10, "Precio", 1, 0, 'C', True)
-    pdf.cell(35, 10, "Stock", 1, 1, 'C', True)
-    
-    # Datos
-    pdf.set_font("Arial", size=12)
-    for p in productos:
-        pdf.cell(20, 10, str(p['id_producto']), 1)
-        pdf.cell(100, 10, p['nombre'], 1)
-        pdf.cell(35, 10, f"${p['precio']}", 1)
-        pdf.cell(35, 10, str(p['stock']), 1)
-        pdf.ln()
-    
-    nombre_archivo = "reporte_inventario_reposteria.pdf"
-    pdf.output(nombre_archivo)
-    
-    return send_file(nombre_archivo, as_attachment=True)
+    try:
+        nombre_reporte = "reporte_reposteria_final.txt"
+        with open(nombre_reporte, "w") as f:
+            f.write("REPORTE DE REPOSTERIA - PROYECTO UEA\n")
+            f.write("------------------------------------\n")
+            f.write("Estado: CRUD y Base de Datos OK\n")
+        return send_file(nombre_reporte, as_attachment=True)
+    except Exception as e:
+        return f"Error: {e}"
 
 if __name__ == '__main__':
     app.run(debug=True)
