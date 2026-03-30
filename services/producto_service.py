@@ -1,9 +1,11 @@
-@staticmethod
+from conexion import obtener_conexion
+
+class ProductoService:
+    @staticmethod
     def listar_facturas():
         conexion = obtener_conexion()
         try:
             with conexion.cursor() as cursor:
-                # Esta consulta une las 3 tablas para mostrar nombres en lugar de IDs
                 query = """
                     SELECT 
                         f.id_factura, 
@@ -18,11 +20,19 @@
                     ORDER BY f.fecha DESC
                 """
                 cursor.execute(query)
-                # Retorna todos los registros encontrados
                 return cursor.fetchall()
         except Exception as e:
-            print(f"Error al listar facturas: {e}")
+            print(f"Error al cargar facturas: {e}")
             return []
         finally:
-            # Muy importante cerrar la conexión para evitar errores de MySQL
+            conexion.close()
+
+    @staticmethod
+    def listar_todos():
+        conexion = obtener_conexion()
+        try:
+            with conexion.cursor() as cursor:
+                cursor.execute("SELECT * FROM productos")
+                return cursor.fetchall()
+        finally:
             conexion.close()
